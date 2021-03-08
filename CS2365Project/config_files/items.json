@@ -1,5 +1,5 @@
 {
-  "music": [
+  "items" : [
     {
       "id": "1",
       "name": "Blink-182 Greatest Hits",
@@ -31,9 +31,7 @@
       "reserved": 0,
       "available": 100,
       "imgName": "Albums/greenday.jpg"
-    }
-  ],
-  "merch": [
+    },
     {
       "id": "5",
       "name": "ACDC T-Shirt",
