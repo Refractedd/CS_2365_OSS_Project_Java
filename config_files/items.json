@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "Blink-182 Greatest Hits",
-      "price": 1299,
+      "price": 12.99,
       "reserved": 1,
       "available": 99,
       "imgName": "Albums/Blink-182 Album.jpg"
@@ -11,7 +11,7 @@
     {
       "id": "2",
       "name": "Let it Be",
-      "price": 1499,
+      "price": 14.99,
       "reserved": 0,
       "available": 100,
       "imgName": "Albums/Let it Be Album.jpg"
@@ -19,7 +19,7 @@
     {
       "id": "3",
       "name": "Bohemian Rhapsodey",
-      "price": 999,
+      "price": 9.99,
       "reserved": 0,
       "available": 100,
       "imgName": "Albums/Bohemian Rhapsodey Album.jpg"
@@ -27,7 +27,7 @@
     {
       "id": "4",
       "name": "Greenday",
-      "price": 1999,
+      "price": 19.99,
       "reserved": 0,
       "available": 100,
       "imgName": "Albums/greenday.jpg"
@@ -35,7 +35,7 @@
     {
       "id": "5",
       "name": "ACDC T-Shirt",
-      "price": 1999,
+      "price": 19.99,
       "reserved": 0,
       "available": 100,
       "imgName": "Merch/ACDC Shirt.jpg"
@@ -43,7 +43,7 @@
     {
       "id": "6",
       "name": "Linkin Park Shirt",
-      "price": 699,
+      "price": 6.99,
       "reserved": 0,
       "available": 100,
       "imgName": "Merch/Linkin Park Shirt.jpg"
@@ -51,7 +51,7 @@
     {
       "id": "7",
       "name": "Nirvana Shirt",
-      "price": 799,
+      "price": 7.99,
       "reserved": 0,
       "available": 100,
       "imgName": "Merch/Nirvana Shirt.jpg"
@@ -59,7 +59,7 @@
     {
       "id": "8",
       "name": "Red Hot Chilli Peppers Shirt",
-      "price": 1299,
+      "price": 12.99,
       "reserved": 0,
       "available": 100,
       "imgName": "Merch/Red Hot Chilli Peppers Shirt.jpg"
@@ -67,7 +67,7 @@
     {
       "id": "9",
       "name": "Beatles Shirt",
-      "price": 899,
+      "price": 8.99,
       "reserved": 1,
       "available": 99,
       "imgName": "Merch/Beatles Shirt.png"
