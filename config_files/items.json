@@ -1,76 +1,54 @@
-{
-  "items" : [
-    {
-      "id": "1",
-      "name": "Blink-182 Greatest Hits",
-      "price": 12.99,
-      "reserved": 1,
-      "available": 99,
-      "imgName": "Albums/Blink-182 Album.jpg"
-    },
-    {
-      "id": "2",
-      "name": "Let it Be",
-      "price": 14.99,
-      "reserved": 0,
-      "available": 100,
-      "imgName": "Albums/Let it Be Album.jpg"
-    },
-    {
-      "id": "3",
-      "name": "Bohemian Rhapsodey",
-      "price": 9.99,
-      "reserved": 0,
-      "available": 100,
-      "imgName": "Albums/Bohemian Rhapsodey Album.jpg"
-    },
-    {
-      "id": "4",
-      "name": "Greenday",
-      "price": 19.99,
-      "reserved": 0,
-      "available": 100,
-      "imgName": "Albums/greenday.jpg"
-    },
-    {
-      "id": "5",
-      "name": "ACDC T-Shirt",
-      "price": 19.99,
-      "reserved": 0,
-      "available": 100,
-      "imgName": "Merch/ACDC Shirt.jpg"
-    },
-    {
-      "id": "6",
-      "name": "Linkin Park Shirt",
-      "price": 6.99,
-      "reserved": 0,
-      "available": 100,
-      "imgName": "Merch/Linkin Park Shirt.jpg"
-    },
-    {
-      "id": "7",
-      "name": "Nirvana Shirt",
-      "price": 7.99,
-      "reserved": 0,
-      "available": 100,
-      "imgName": "Merch/Nirvana Shirt.jpg"
-    },
-    {
-      "id": "8",
-      "name": "Red Hot Chilli Peppers Shirt",
-      "price": 12.99,
-      "reserved": 0,
-      "available": 100,
-      "imgName": "Merch/Red Hot Chilli Peppers Shirt.jpg"
-    },
-    {
-      "id": "9",
-      "name": "Beatles Shirt",
-      "price": 8.99,
-      "reserved": 1,
-      "available": 99,
-      "imgName": "Merch/Beatles Shirt.png"
-    }
-  ]
-}
+1
+Blink-182 Greatest Hits
+12.99
+1
+99,
+Albums/Blink-182 Album.jpg
+2
+Let it Be
+14.99
+0
+100
+Albums/Let it Be Album.jpg
+3
+Bohemian Rhapsodey
+9.99
+0
+100
+Albums/Bohemian Rhapsodey Album.jpg
+4
+Greenday
+19.99
+0
+100
+Albums/greenday.jpg
+5
+ACDC T-Shirt
+19.99
+0
+100
+Merch/ACDC Shirt.jpg
+6
+Linkin Park Shirt
+6.99
+0
+100
+Merch/Linkin Park Shirt.jpg
+7
+Nirvana Shirt
+7.99
+0
+100
+Merch/Nirvana Shirt.jpg
+8
+Red Hot Chilli Peppers Shirt
+12.99
+0
+100
+Merch/Red Hot Chilli Peppers Shirt.jpg
+9
+Beatles Shirt
+8.99
+1
+99
+Merch/Beatles Shirt.png
