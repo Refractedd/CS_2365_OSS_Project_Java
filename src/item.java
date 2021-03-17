@@ -58,7 +58,12 @@ class item{
     }
 
     public int getQuantityPurchased(){ return quantityPurchased; }
+
     public String getImgName() {
         return imgName;
+    }
+
+    public void setQuantityPurchased(int quantityPurchased) {
+        this.quantityPurchased = quantityPurchased;
     }
 }

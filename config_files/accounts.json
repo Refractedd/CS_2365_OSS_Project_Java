@@ -1,29 +1,71 @@
-[
-  {
-    "email": "example@ttu.edu",
-    "password": "asdf",
-    "cardNumber": "1234567890123456",
-    "cardExpiration": "12/21",
-    "cardCVV": "123",
-    "id": 0,
-    "type" :"customer"
-  },
-  {
-    "email": "example2@ttu.edu",
-    "password": "asdf",
-    "cardNumber": "1234567890123456",
-    "cardExpiration": "12/21",
-    "cardCVV": "123",
-    "id": 1, 
-    "type" : "customer"
-  },
-  {
-    "email": "example3@ttu.edu",
-    "password": "asdf",
-    "cardNumber": "1234567890123456",
-    "cardExpiration": "12/21",
-    "cardCVV": "123",
-    "id": 2, 
-    "type" : "supplier"
-  }
-]
+[{
+	"cardCVV":"123",
+	"password":"asdf",
+	"id":0,
+	"cardExpiration":"12\/21",
+	"type":"supplier",
+	"email":"example1@ttu.edu",
+	"cardNumber":"1234567890123456"},
+
+	{
+	"cardCVV":"123",
+	"password":"asdf",
+	"id":1,
+	"cardExpiration":"12\/21",
+	"type":"customer",
+	"email":"example2@ttu.edu",
+	"cardNumber":"1234567890123456"},
+
+	{
+	"cardCVV":"123",
+	"password":"asdf",
+	"id":-1,
+	"cardExpiration":"12\/21",
+	"type":"Customer",
+	"email":"example4#ttu.edu",
+	"cardNumber":"1234567890123456"},
+
+	{
+	"cardCVV":"123",
+	"password":"asdf",
+	"id":-1,
+	"cardExpiration":"12\/21",
+	"type":"Customer",
+	"email":"example4#ttu.edu",
+	"cardNumber":"1234567890123456"},
+
+	{
+	"cardCVV":"123",
+	"password":"asdf",
+	"id":-1,
+	"cardExpiration":"12\/21",
+	"type":"Customer",
+	"email":"example4#ttu.edu",
+	"cardNumber":"1234567890123456"},
+
+	{
+	"cardCVV":"123",
+	"password":"asdf",
+	"id":-1,
+	"cardExpiration":"12\/21",
+	"type":"Customer",
+	"email":"example4#ttu.edu",
+	"cardNumber":"1234567890123456"},
+
+	{
+	"cardCVV":"123",
+	"password":"asdf",
+	"id":-1,
+	"cardExpiration":"12\/21",
+	"type":"Customer",
+	"email":"example4#ttu.edu",
+	"cardNumber":"1234567890123456"},
+
+	{
+	"cardCVV":"123",
+	"password":"asdf",
+	"id":-1,
+	"cardExpiration":"12\/21",
+	"type":"Customer",
+	"email":"example4#ttu.edu",
+	"cardNumber":"1234567890123456"}]
