@@ -5,19 +5,17 @@
     "items": [
       {
         "id": "1",
-        "title": "Blink-182 Greatest Hits",
-        "price": "$12.99",
-        "img": "http://localhost:3000/Images/Albums/Blink-182%20Album.jpg",
-        "quantityPurchased": "1",
-        "quantityInStock": "100"
+        "name": "Blink-182 Greatest Hits",
+        "price": 1299,
+        "imgName": "http://localhost:3000/Images/Albums/Blink-182%20Album.jpg",
+        "quantityPurchased": 1
       },
       {
         "id": "9",
-        "title": "Beatles Shirt",
-        "price": "$8.99",
-        "img": "http://localhost:3000/Images/Merch/Beatles%20Shirt.png",
-        "quantityPurchased": "1",
-        "quantityInStock": "100"
+        "name": "Beatles Shirt",
+        "price": 899,
+        "imgName": "http://localhost:3000/Images/Merch/Beatles%20Shirt.png",
+        "quantityPurchased": 1
       }
     ],
     "orderTotal": 6498,
@@ -31,11 +29,10 @@
     "items": [
       {
         "id": "1",
-        "title": "Blink-182 Greatest Hits",
-        "price": "$12.99",
-        "img": "http://localhost:3000/Images/Albums/Blink-182%20Album.jpg",
-        "quantityPurchased": "1",
-        "quantityInStock": "100"
+        "name": "Blink-182 Greatest Hits",
+        "price": 1299,
+        "imgName": "http://localhost:3000/Images/Albums/Blink-182%20Album.jpg",
+        "quantityPurchased": 1
       }
     ],
     "orderTotal": 1599,
@@ -49,35 +46,31 @@
     "items": [
       {
         "id": "1",
-        "title": "Blink-182 Greatest Hits",
-        "price": "$12.99",
-        "img": "http://localhost:3000/Images/Albums/Blink-182%20Album.jpg",
-        "quantityPurchased": "1",
-        "quantityInStock": "100"
+        "name": "Blink-182 Greatest Hits",
+        "price": 1299,
+        "imgName": "http://localhost:3000/Images/Albums/Blink-182%20Album.jpg",
+        "quantityPurchased": 1
       },
       {
         "id": "4",
-        "title": "Greenday",
-        "price": "$19.99",
-        "img": "http://localhost:3000/Images/Albums/greenday.jpg",
-        "quantityPurchased": "1",
-        "quantityInStock": "100"
+        "name": "Greenday",
+        "price": 1999,
+        "imgName": "http://localhost:3000/Images/Albums/greenday.jpg",
+        "quantityPurchased": 1
       },
       {
         "id": "9",
-        "title": "Beatles Shirt",
-        "price": "$8.99",
-        "img": "http://localhost:3000/Images/Merch/Beatles%20Shirt.png",
-        "quantityPurchased": "1",
-        "quantityInStock": "100"
+        "name": "Beatles Shirt",
+        "price": 899,
+        "imgName": "http://localhost:3000/Images/Merch/Beatles%20Shirt.png",
+        "quantityPurchased": 1
       },
       {
         "id": "8",
-        "title": "Red Hot Chilli Peppers Shirt",
-        "price": "$12.99",
-        "img": "http://localhost:3000/Images/Merch/Red%20Hot%20Chilli%20Peppers%20Shirt.jpg",
-        "quantityPurchased": "1",
-        "quantityInStock": "100"
+        "name": "Red Hot Chilli Peppers Shirt",
+        "price": 1299,
+        "imgName": "http://localhost:3000/Images/Merch/Red%20Hot%20Chilli%20Peppers%20Shirt.jpg",
+        "quantityPurchased": 1
       }
     ],
     "orderTotal": 9496,
@@ -91,38 +84,34 @@
     "items": [
       {
         "id": "1",
-        "title": "Blink-182 Greatest Hits",
-        "price": "$12.99",
-        "img": "http://localhost:3000/Images/Albums/Blink-182%20Album.jpg",
-        "quantityPurchased": "2",
-        "quantityInStock": "100"
+        "name": "Blink-182 Greatest Hits",
+        "price": 1299,
+        "imgName": "http://localhost:3000/Images/Albums/Blink-182%20Album.jpg",
+        "quantityPurchased": 2
       },
       {
         "id": "2",
-        "title": "Let it Be",
-        "price": "$14.99",
-        "img": "http://localhost:3000/Images/Albums/Let%20it%20Be%20Album.jpg",
-        "quantityPurchased": "3",
-        "quantityInStock": "100"
+        "name": "Let it Be",
+        "price": 1499,
+        "imgName": "http://localhost:3000/Images/Albums/Let%20it%20Be%20Album.jpg",
+        "quantityPurchased": 3
       },
       {
         "id": "3",
-        "title": "Bohemian Rhapsodey",
-        "price": "$9.99",
-        "img": "http://localhost:3000/Images/Albums/Bohemian%20Rhapsodey%20Album.jpg",
-        "quantityPurchased": "2",
-        "quantityInStock": "100"
+        "name": "Bohemian Rhapsodey",
+        "price": 999,
+        "imgName": "http://localhost:3000/Images/Albums/Bohemian%20Rhapsodey%20Album.jpg",
+        "quantityPurchased": 2
       },
       {
         "id": "9",
-        "title": "Beatles Shirt",
-        "price": "$8.99",
-        "img": "http://localhost:3000/Images/Merch/Beatles%20Shirt.png",
-        "quantityPurchased": "4",
-        "quantityInStock": "100"
+        "name": "Beatles Shirt",
+        "price": 899,
+        "imgName": "http://localhost:3000/Images/Merch/Beatles%20Shirt.png",
+        "quantityPurchased": 4
       }
     ],
-    "orderTotal": 12988.999999999998,
+    "orderTotal": 12988,
     "orderStatus": "Ordered",
     "purchaseAuthorizationNumber": "00000000",
     "orderDate": "3/4/2021"
