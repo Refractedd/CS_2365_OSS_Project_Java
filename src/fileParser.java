@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
 class fileParser{
     String accounts_path;
     String items_path;
@@ -35,10 +34,104 @@ class fileParser{
     public fileParser() { }
 
     /**
-     * Given the information for hte oder, this method adds a new order to the orders.json file. Please note that this
-     *  method does no error checking. The invoker must find the next available order_id and confirm all the params passed
-     *  are correct
-     * @param orderId : unique id of the order
+     * This method parses through the accounts.json file and returns the next available customer_id
+     * @return : the next available customer_id
+     * @throws IOException : incorrect file path
+     * @throws ParseException : incorrect JSON object
+     */
+    public int getNextCustomerId() throws IOException, ParseException {
+        int nextAvailable = -2;
+        //Parse the file
+        JSONParser jsonParser = new JSONParser();
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../config_files/accounts.json"));
+
+        //Iterating the contents of the array 'items'
+        Iterator iterator = jsonArray.iterator();
+        while(iterator.hasNext()) {
+            //Grab the next object and save appropriate types
+            JSONObject account = (JSONObject) iterator.next();
+
+            nextAvailable = ((Long)account.get("id")).intValue();
+        }
+
+        return nextAvailable + 1;
+    }
+
+    /**
+     * This method parses through the orders.json file and returns the next available orderId
+     * @return : the next available orderId
+     * @throws IOException : incorrect file path
+     * @throws ParseException : incorrect JSON object
+     */
+    public String getNextOrderId() throws IOException, ParseException {
+        String nextAvailable = "";
+        //Parse the file
+        JSONParser jsonParser = new JSONParser();
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../config_files/orders.json"));
+
+        //Iterating the contents of the array 'items'
+        Iterator iterator = jsonArray.iterator();
+        while(iterator.hasNext()) {
+            //Grab the next object and save appropriate types
+            JSONObject order = (JSONObject) iterator.next();
+
+            nextAvailable = (String) order.get("orderId");
+        }
+
+        return "" + (Integer.parseInt(nextAvailable) + 1);
+    }
+
+    /**
+     * Given an orderId and a desiredStatus this method will update the orders.json file to reflect the appropriate orderStatus.
+     *  Please not that this method does no error checking. Valid values for desiredStatus are "Ordered", "Ready", or "Shipped"
+     * @param orderId : unique id for the order
+     * @param desiredStatus : value to set the order status to. "Ordered", "Ready", or "Shipped" are valid values
+     * @throws IOException : invalid file path
+     * @throws ParseException : invalid JSON object
+     */
+    public void updateOrderStatus(String orderId, String desiredStatus) throws IOException, ParseException {
+        //Parse the file
+        JSONParser jsonParser = new JSONParser();
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../config_files/orders.json"));
+
+        //Iterating the contents of the array 'items'
+        Iterator iterator = jsonArray.iterator();
+        while(iterator.hasNext()) {
+            //Grab the next object and save appropriate types
+            JSONObject order = (JSONObject) iterator.next();
+
+            if(orderId.equals((String) order.get("orderId"))){
+                order.put("orderStatus", desiredStatus);
+            }
+        }
+
+        PrintWriter pw = new PrintWriter("../config_files/orders.json");
+        pw.write(jsonArray.toJSONString()
+                .replace("},{", "},\n\n\t\t{")
+                .replace("}]", "\n\t\t}]")
+                .replace("\"orderId", "\n\t\t\"orderId")
+                .replace("\"customerId", "\n\t\t\"customerId")
+                .replace("\"orderTotal", "\n\t\t\"orderTotal")
+                .replace("\"orderStatus", "\n\t\t\"orderStatus")
+                .replace("\"purchaseAuthorizationNumber", "\n\t\t\"purchaseAuthorizationNumber")
+                .replace("\"orderDate", "\n\t\t\"orderDate")
+                .replace("\"items", "\n\t\t\"items")
+                .replace("\"imgName", "\n\t\t\t\"imgName")
+                .replace("\"price", "\n\t\t\t\"price")
+                .replace("\"name", "\n\t\t\t\"name")
+                .replace("\"quantityPurchased", "\n\t\t\t\"quantityPurchased")
+                .replace("\"id", "\n\t\t\t\"id")
+
+
+        );
+
+        pw.flush();
+        pw.close();
+    }
+
+    /**
+     * Given the information for the oder, this method adds a new order to the orders.json file. Please note that this
+     *  method does no error checking.
      * @param customerId : customer id associating this order with a customer
      * @param orderTotal : amount of the order * 100
      * @param orderStatus : Status of the order... "Ordered", "Ready", "Shipped"
@@ -49,7 +142,9 @@ class fileParser{
      * @throws IOException
      * @throws ParseException
      */
-    public void addNewOrder(String orderId, String customerId, int orderTotal, String orderStatus, String purchaseAuthorizationNumber, String orderDate, ArrayList<item> items) throws IOException, ParseException {
+    public void addNewOrder(String customerId, int orderTotal, String orderStatus, String purchaseAuthorizationNumber, String orderDate, ArrayList<item> items) throws IOException, ParseException {
+        String orderId = this.getNextOrderId();
+
         //Parse the file
         JSONParser jsonParser = new JSONParser();
         JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../config_files/orders.json"));
@@ -198,18 +293,19 @@ class fileParser{
 
     /**
      * Given the params passed, adds an account to the accounts.json file. Please note that error checking is not done
-     *  in this method. The next available customer id must be passed in correctly
+     *  in this method. All params must be passed in correctly
      * @param email : email of the customer
      * @param password : password of the customer
      * @param cardNumber : 16 digit card number of the customer
      * @param cardExpiration : MM/YY format of the card expiration date
      * @param cardCVV : three digit card CVV code
      * @param type : type of the account... customer or supplier
-     * @param id : customer id
      * @throws IOException : incorrect file path
      * @throws ParseException : incorrect JSON object
      */
-    public void createAccount(String email, String password, String cardNumber, String cardExpiration, String cardCVV, String type, int id) throws IOException, ParseException {
+    public void createAccount(String email, String password, String cardNumber, String cardExpiration, String cardCVV, String type) throws IOException, ParseException {
+        int id = this.getNextCustomerId();
+
         //Parse the file
         JSONParser jsonParser = new JSONParser();
         JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../config_files/accounts.json"));
