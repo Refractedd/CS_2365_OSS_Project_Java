@@ -8,6 +8,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+class test{
+    public static void main(String[] args) throws IOException, ParseException {
+        fileParser file = new fileParser();
+
+        System.out.println(file.getAccounts());
+    }
+}
 class fileParser{
     String accounts_path;
     String items_path;
@@ -16,7 +23,7 @@ class fileParser{
     //Holds all the available items. Parsed from items.json
     ArrayList<item> catalog = new ArrayList<item>();
     ArrayList<order> order_history = new ArrayList<order>();
-
+    ArrayList<account> accounts = new ArrayList<account>();
 
     /**
      * Constructor. Holds all file paths
@@ -31,6 +38,31 @@ class fileParser{
     }
 
     public fileParser() { }
+
+    public ArrayList<account> getAccounts() throws IOException, ParseException {
+        //Parse the file
+        JSONParser jsonParser = new JSONParser();
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../config_files/accounts.json"));
+
+        //Iterating the contents of the array 'items'
+        Iterator iterator = jsonArray.iterator();
+        while(iterator.hasNext()) {
+            //Grab the next object and save appropriate types
+            JSONObject account = (JSONObject) iterator.next();
+
+            String email = (String) account.get("email");;
+            String password = (String) account.get("password");
+            String cardNumber = (String) account.get("cardNumber");
+            String cardExpiration = (String) account.get("cardExpiration");
+            String cardCVV = (String) account.get("cardCVV");
+            String type = (String) account.get("type");
+            int id = ((Long)account.get("id")).intValue();
+
+            accounts.add(new account(email, password, cardNumber, cardExpiration, cardCVV, type, id));
+        }
+
+        return accounts;
+    }
 
     public ArrayList<order> getOrders() throws IOException, ParseException {
         //Parse the file
