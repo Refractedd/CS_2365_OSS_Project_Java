@@ -46,10 +46,14 @@ public class mainClass {
 
 	public static void main(String[] args) {
 		
-		F obj = new F();
+		//F obj = new F();
 		
-		obj.readFile();
-		
+		//obj.readFile();
+
+		LogOn login = new LogOn();
+
+		login.display();
+
 	}
 
 }
