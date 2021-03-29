@@ -7,13 +7,14 @@ class order{
     String orderStatus;
     String purchaseAuthorizationNumber;
     String orderDate;
+    String shippingMethod;
     ArrayList<item> items;
 
     //constructors
     order(){
     }
 
-    order(String orderId, String customerId, int orderTotal, String orderStatus, String purchaseAuthorizationNumber, String orderDate, ArrayList<item> items){
+    order(String orderId, String customerId, int orderTotal, String orderStatus, String purchaseAuthorizationNumber, String orderDate, String shippingMethod, ArrayList<item> items){
         this.orderId = orderId;
         this.customerId = customerId;
         this.orderTotal = orderTotal;
@@ -21,6 +22,7 @@ class order{
         this.purchaseAuthorizationNumber = purchaseAuthorizationNumber;
         this.orderDate = orderDate;
         this.items = items;
+        this.shippingMethod = shippingMethod;
     }
 
     public String getOrderId() {
@@ -50,4 +52,6 @@ class order{
     public ArrayList<item> getItems() {
         return items;
     }
+
+    public String getShippingMethod() { return shippingMethod; }
 }
