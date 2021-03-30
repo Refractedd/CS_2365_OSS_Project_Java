@@ -14,5 +14,4 @@ public class application {
 		logOn login = new logOn(buff);
 		login.loginFrame();
 	}
-
 }
