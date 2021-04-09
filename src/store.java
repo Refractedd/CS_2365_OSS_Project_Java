@@ -288,7 +288,8 @@ public class store implements ActionListener {
                 if(item.getName().equals(actionCommand)){
                     for(item itemInCart : cart){
                         if(itemInCart.getName().equals(item.getName())){
-                            itemInCart.setQuantityPurchased(item.quantityPurchased+1);
+                            itemInCart.setQuantityPurchased(itemInCart.getQuantityPurchased()+1);
+
                             alreadyInCart = true;
                             break;
                         }
@@ -373,7 +374,7 @@ public class store implements ActionListener {
         }
 
         else if(reply[0].equals("true")){
-            JOptionPane.showConfirmDialog(null, "Order successfully place! $" + (total/100.0) + " has been charged.", "Order", JOptionPane.OK_CANCEL_OPTION);
+            JOptionPane.showConfirmDialog(null, "Order successfully placed! $" + (total/100.0) + " has been charged.", "Order", JOptionPane.OK_CANCEL_OPTION);
             fileParser.changeCardInfo("" + customerID, cardNumber, cardExpiration, cardCVV);
 
             addNewOrder(reply[1], Objects.requireNonNull(shippingList.getSelectedItem()).toString());
@@ -425,7 +426,7 @@ public class store implements ActionListener {
                 }
 
                 else if(reply[0].equals("true")){
-                    JOptionPane.showConfirmDialog(null, "Order successfully place! $" + (total/100.0) + "has been charged.", "Order", JOptionPane.OK_CANCEL_OPTION);
+                    JOptionPane.showConfirmDialog(null, "Order successfully placed! $" + (total/100.0) + " has been charged.", "Order", JOptionPane.OK_CANCEL_OPTION);
 
                     addNewOrder(reply[1], Objects.requireNonNull(shippingList.getSelectedItem()).toString());
 
@@ -464,6 +465,8 @@ public class store implements ActionListener {
     public void changeToAccountInfoFrame() throws IOException, ParseException {
         accountInfo = new JPanel();
         accountInfoFrame();
+
+        scrollFrame = new JScrollPane(accountInfo);
 
         frame.setContentPane(scrollFrame);
         frame.setTitle("Account Information");

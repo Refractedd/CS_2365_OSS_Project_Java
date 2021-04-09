@@ -133,7 +133,7 @@ public class logOn implements ActionListener {
                 loginPanel.setVisible(false);
 
                 if(account.getType().equals("supplier")){
-                    supplier supplier = new supplier(frame);
+                    supplier supplier = new supplier(frame, loginPanel);
                     supplier.frame();
                 }
                 else{
@@ -170,10 +170,16 @@ public class logOn implements ActionListener {
            createAccountResponseLabel.setText("Creating account...");
 
            int customerID = fileParser.createAccount(email, password, cardNumber, cardExpirationDate, cardCVV, "Customer");
+
+           if(customerID < 0) {
+               createAccountResponseLabel.setText("Please enter valid credentials.");
+               return;
+           }
+
            createAccountPanel.setVisible(false);
 
            store store = new store(frame, customerID, buff, loginPanel);
-           frame.setContentPane(null);
+           //frame.setContentPane(null);
            store.storeFrame();
        }
 

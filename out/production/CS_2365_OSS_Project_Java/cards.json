@@ -1,0 +1,9 @@
+[
+	{"cardCVV":"123","remainingBalance":10000,"cardExpiration":"12-21","cardNumber":"1111111111111111"}
+,
+	{"cardCVV":"123","remainingBalance":7602,"cardExpiration":"12-21","cardNumber":"2222222222222222"}
+,
+	{"cardCVV":"123","remainingBalance":10000,"cardExpiration":"12-21","cardNumber":"3333333333333333"}
+,
+	{"cardCVV":"123","remainingBalance":10000,"cardExpiration":"12-21","cardNumber":"4444444444444444"}
+]

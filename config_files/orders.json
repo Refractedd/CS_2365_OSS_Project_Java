@@ -3,142 +3,94 @@
 		"shippingMethod":"Shipping ($3)",
 		"customerId":"1",
 		"orderStatus":"Ordered",
-		"orderDate":"29\/03\/2021",
+		"orderDate":"09\/04\/2021",
 		"items":[{
 			"imgName":"Albums\/Blink-182 Album.jpg",
 			"price":1299,
 			"name":"Blink-182 Greatest Hits",
 			"quantityPurchased":1,
-			"id":"1"},
+			"id":"1"
+		}],
+		"orderTotal":5599,
+		"purchaseAuthorizationNumber":"00000001"},
 
 		{
-			"imgName":"Albums\/Let it Be Album.jpg",
-			"price":1499,
-			"name":"Let it Be",
+		"orderId":"2",
+		"shippingMethod":"Shipping ($3)",
+		"customerId":"1",
+		"orderStatus":"Ordered",
+		"orderDate":"09\/04\/2021",
+		"items":[{
+			"imgName":"Albums\/Blink-182 Album.jpg",
+			"price":1299,
+			"name":"Blink-182 Greatest Hits",
 			"quantityPurchased":1,
-			"id":"2"},
+			"id":"1"
+		}],
+		"orderTotal":1599,
+		"purchaseAuthorizationNumber":"00000001"},
 
 		{
-			"imgName":"Albums\/Bohemian Rhapsodey Album.jpg",
-			"price":999,
-			"name":"Bohemian Rhapsodey",
-			"quantityPurchased":1,
-			"id":"3"},
-
-		{
-			"imgName":"Albums\/greenday.jpg",
-			"price":1999,
-			"name":"Greenday",
-			"quantityPurchased":1,
-			"id":"4"},
-
-		{
-			"imgName":"Merch\/ACDC Shirt.jpg",
-			"price":1999,
-			"name":"ACDC T-Shirt",
-			"quantityPurchased":1,
-			"id":"5"},
-
-		{
-			"imgName":"Merch\/Linkin Park Shirt.jpg",
-			"price":699,
-			"name":"Linkin Park Shirt",
-			"quantityPurchased":1,
-			"id":"6"},
-
-		{
-			"imgName":"Merch\/Nirvana Shirt.jpg",
-			"price":799,
-			"name":"Nirvana Shirt",
-			"quantityPurchased":1,
-			"id":"7"},
-
-		{
+		"orderId":"3",
+		"shippingMethod":"Shipping ($3)",
+		"customerId":"1",
+		"orderStatus":"Ordered",
+		"orderDate":"09\/04\/2021",
+		"items":[{
 			"imgName":"Merch\/Red Hot Chilli Peppers Shirt.jpg",
 			"price":1299,
 			"name":"Red Hot Chilli Peppers Shirt",
-			"quantityPurchased":1,
-			"id":"8"},
+			"quantityPurchased":6,
+			"id":"8"
+		}],
+		"orderTotal":8094,
+		"purchaseAuthorizationNumber":"00000001"},
 
 		{
+		"orderId":"4",
+		"shippingMethod":"Shipping ($3)",
+		"customerId":"1",
+		"orderStatus":"Ordered",
+		"orderDate":"09\/04\/2021",
+		"items":[{
 			"imgName":"Merch\/Beatles Shirt.png",
 			"price":899,
 			"name":"Beatles Shirt",
 			"quantityPurchased":1,
 			"id":"9"
 		}],
-		"orderTotal":15791,
+		"orderTotal":1199,
 		"purchaseAuthorizationNumber":"00000001"},
 
 		{
-		"orderId":"2",
+		"orderId":"5",
+		"shippingMethod":"Shipping ($3)",
 		"customerId":"1",
-		"orderTotal":11491,
 		"orderStatus":"Ordered",
-		"purchaseAuthorizationNumber":"00000001",
-		"orderDate":"29\/03\/2021",
-		"shippingMethod":"Pick-Up",
+		"orderDate":"09\/04\/2021",
 		"items":[{
-			"imgName":"Albums\/Blink-182 Album.jpg",
-			"price":1299,
-			"name":"Blink-182 Greatest Hits",
-			"quantityPurchased":1,
-			"id":"1"},
-
-		{
-			"imgName":"Albums\/Let it Be Album.jpg",
-			"price":1499,
-			"name":"Let it Be",
-			"quantityPurchased":1,
-			"id":"2"},
-
-		{
-			"imgName":"Albums\/Bohemian Rhapsodey Album.jpg",
-			"price":999,
-			"name":"Bohemian Rhapsodey",
-			"quantityPurchased":1,
-			"id":"3"},
-
-		{
-			"imgName":"Albums\/greenday.jpg",
-			"price":1999,
-			"name":"Greenday",
-			"quantityPurchased":1,
-			"id":"4"},
-
-		{
-			"imgName":"Merch\/ACDC Shirt.jpg",
-			"price":1999,
-			"name":"ACDC T-Shirt",
-			"quantityPurchased":1,
-			"id":"5"},
-
-		{
-			"imgName":"Merch\/Linkin Park Shirt.jpg",
-			"price":699,
-			"name":"Linkin Park Shirt",
-			"quantityPurchased":1,
-			"id":"6"},
-
-		{
-			"imgName":"Merch\/Nirvana Shirt.jpg",
-			"price":799,
-			"name":"Nirvana Shirt",
-			"quantityPurchased":1,
-			"id":"7"},
-
-		{
-			"imgName":"Merch\/Red Hot Chilli Peppers Shirt.jpg",
-			"price":1299,
-			"name":"Red Hot Chilli Peppers Shirt",
-			"quantityPurchased":1,
-			"id":"8"},
-
-		{
 			"imgName":"Merch\/Beatles Shirt.png",
 			"price":899,
 			"name":"Beatles Shirt",
 			"quantityPurchased":1,
 			"id":"9"
+		}],
+		"orderTotal":1199,
+		"purchaseAuthorizationNumber":"00000001"},
+
+		{
+		"orderId":"6",
+		"customerId":"1",
+		"orderTotal":1599,
+		"orderStatus":"Ordered",
+		"purchaseAuthorizationNumber":"00000001",
+		"orderDate":"09\/04\/2021",
+		"shippingMethod":"Shipping ($3)",
+		"items":[{
+			"imgName":"Albums\/Blink-182 Album.jpg",
+			"price":1299,
+			"name":"Blink-182 Greatest Hits",
+			"quantityPurchased":1,
+			"id":"1"
 		}]
 		}]

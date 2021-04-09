@@ -12,12 +12,14 @@ public class supplier implements ActionListener {
     fileParser fileParser = new fileParser();
     public JPanel stockPanel = new JPanel();
     public JPanel orderControlPanel = new JPanel();
+    public JPanel loginPanel;
 
     JScrollPane scrollStockFrame = new JScrollPane(stockPanel);
     JScrollPane scrollOrderControlFrame = new JScrollPane(orderControlPanel);
 
-    supplier(JFrame frame){
+    supplier(JFrame frame, JPanel loginPanel){
         this.frame = frame;
+        this.loginPanel = loginPanel;
     }
 
     /**
@@ -54,6 +56,13 @@ public class supplier implements ActionListener {
             case "Move to shipped":
                 try {
                     moveOrderToShipped(actionCommand[1]);
+                } catch (IOException | ParseException ioException) {
+                    ioException.printStackTrace();
+                }
+                break;
+            case "Log Out":
+                try {
+                    changeToLoginFrame();
                 } catch (IOException | ParseException ioException) {
                     ioException.printStackTrace();
                 }
@@ -95,7 +104,8 @@ public class supplier implements ActionListener {
 
         orderControlFrame();
 
-        addViewOrdersButton(gbc, y_level); y_level++;
+        addViewOrdersButton(gbc, y_level);
+        addLogOutButton(gbc, y_level); y_level++;
 
         //For each item currently available for purchase add a row detailing the name, price, and give a button to addToCart
         addStockHeaders(gbc, y_level); y_level+=2;
@@ -199,6 +209,18 @@ public class supplier implements ActionListener {
     }
 
     /**
+     * Transitions from the account information page to the login page. Used for logout events.
+     * @throws IOException : wrong file
+     * @throws ParseException : wrong json
+     */
+    public void changeToLoginFrame() throws IOException, ParseException {
+        frame.setTitle("Login");
+        loginPanel.setVisible(true);
+        frame.setSize(350,200);
+        frame.setContentPane(loginPanel);
+    }
+
+    /**
      * This method checks that there is enough stock of all items bought to mark an order as 'Shipped' and if so, it updates
      *  the order status. Else notifies the Supplier to refill inventory.
      * @param orderID : unique ID of the order
@@ -288,6 +310,19 @@ public class supplier implements ActionListener {
         gbc.weightx = 0;
         gbc.fill = GridBagConstraints.NONE;
         stockPanel.add(viewOrders, gbc);
+    }
+
+    public void addLogOutButton(GridBagConstraints gbc, int y_level){
+        JButton logOut = new JButton("Log Out");
+        logOut.setActionCommand("Log Out");
+        logOut.addActionListener(this);
+        gbc.gridx = 1;
+        gbc.gridy = y_level;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        stockPanel.add(logOut, gbc);
     }
 
     public void addViewStockButton(GridBagConstraints gbc, int y_level){

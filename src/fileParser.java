@@ -18,6 +18,8 @@ class fileParser{
     ArrayList<item> catalog = new ArrayList<item>();
     ArrayList<order> order_history = new ArrayList<order>();
     ArrayList<account> accounts = new ArrayList<account>();
+    ArrayList<card> cards = new ArrayList<card>();
+
 
     /**
      * Constructor. Holds all file paths
@@ -360,6 +362,14 @@ class fileParser{
          * @throws ParseException : incorrect JSON object
          */
     public int createAccount(String email, String password, String cardNumber, String cardExpiration, String cardCVV, String type) throws IOException, ParseException {
+        ArrayList<account> accounts = this.getAccounts();
+
+        for (account account : accounts) {
+            if (account.getEmail().equals(email) ) {
+                return -1;
+            }
+        }
+
         int id = this.getNextCustomerId();
 
         //Parse the file
@@ -426,6 +436,36 @@ class fileParser{
         }
 
         return accounts;
+    }
+
+    /**
+     * This class, when called, parses the cards.json file and puts that information into an ArrayList of card classes
+     * @return : an arrayList of card classes
+     * @throws IOException : incorrect file path
+     * @throws ParseException : incorrect accounts.json file
+     */
+    public ArrayList<card> getCards() throws IOException, ParseException {
+        cards = new ArrayList<>();
+
+        //Parse the file
+        JSONParser jsonParser = new JSONParser();
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../config_files/cards.json"));
+
+        //Iterating the contents of the array 'items'
+        Iterator iterator = jsonArray.iterator();
+        while(iterator.hasNext()) {
+            //Grab the next object and save appropriate types
+            JSONObject card = (JSONObject) iterator.next();
+
+            String cardNumber = (String) card.get("cardNumber");
+            String cardExpiration = (String) card.get("cardExpiration");
+            String cardCVV = (String) card.get("cardCVV");
+            int remainingBalance = ((Long)card.get("remainingBalance")).intValue();
+
+            cards.add(new card(cardNumber, cardExpiration, cardCVV, remainingBalance));
+        }
+
+        return cards;
     }
 
     /**
