@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Random;
 
 public class banking extends Thread
 {
@@ -48,11 +49,11 @@ public class banking extends Thread
             try {
                 chargeCard(Integer.parseInt(msg[0]), msg[1]);
                 String confirmationNumber = generateConfirmationNumber();
+
+                buff.sendReply(true + "," + confirmationNumber);
             } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }
-
-            buff.sendReply(validCard + ",00000001");
 
             System.out.println("[BANK] " + Arrays.toString(msg));
         }
@@ -98,6 +99,13 @@ public class banking extends Thread
     }
 
     public String generateConfirmationNumber() throws IOException, ParseException {
-       return "";
+        StringBuilder code= new StringBuilder();
+        Random rand=new Random();//Generate random numbers
+        for(int a=0;a<8;a++){
+            code.append(rand.nextInt(10));//Generate 6-digit verification code
+
+        }
+
+       return code.toString();
     }
 }
