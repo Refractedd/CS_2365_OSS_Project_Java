@@ -32,4 +32,22 @@
 	"cardExpiration":"12-21",
 	"type":"Customer",
 	"email":"example4@ttu.edu",
-	"cardNumber":"4444444444444444"}]
+	"cardNumber":"4444444444444444"},
+
+	{
+	"cardCVV":"123",
+	"password":"asdf",
+	"id":4,
+	"cardExpiration":"12-21",
+	"type":"Customer",
+	"email":"ben@ttu.edu",
+	"cardNumber":"1111111111111111"},
+
+	{
+	"cardCVV":"123",
+	"password":"asdf",
+	"id":5,
+	"cardExpiration":"12-21",
+	"type":"Customer",
+	"email":"ben1@ttu.edu",
+	"cardNumber":"1111111111111111"}]
