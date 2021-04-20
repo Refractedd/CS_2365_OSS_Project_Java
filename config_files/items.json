@@ -1,63 +1,76 @@
-{"items":[{
-		"imgName":"Albums\/Blink-182 Album.jpg",
-		"reserved":0,
-		"price":1299,
-		"name":"Blink-182 Greatest Hits",
-		"available":100,
-		"id":"1"},
-	{
-		"imgName":"Albums\/Let it Be Album.jpg",
-		"reserved":-2,
-		"price":1499,
-		"name":"Let it Be",
-		"available":100,
-		"id":"2"},
-	{
-		"imgName":"Albums\/Bohemian Rhapsodey Album.jpg",
-		"reserved":0,
-		"price":999,
-		"name":"Bohemian Rhapsodey",
-		"available":100,
-		"id":"3"},
-	{
-		"imgName":"Albums\/greenday.jpg",
-		"reserved":0,
-		"price":1999,
-		"name":"Greenday",
-		"available":100,
-		"id":"4"},
-	{
-		"imgName":"Merch\/ACDC Shirt.jpg",
-		"reserved":0,
-		"price":1999,
-		"name":"ACDC T-Shirt",
-		"available":100,
-		"id":"5"},
-	{
-		"imgName":"Merch\/Linkin Park Shirt.jpg",
-		"reserved":0,
-		"price":699,
-		"name":"Linkin Park Shirt",
-		"available":100,
-		"id":"6"},
-	{
-		"imgName":"Merch\/Nirvana Shirt.jpg",
-		"reserved":0,
-		"price":799,
-		"name":"Nirvana Shirt",
-		"available":100,
-		"id":"7"},
-	{
-		"imgName":"Merch\/Red Hot Chilli Peppers Shirt.jpg",
-		"reserved":0,
-		"price":1299,
-		"name":"Red Hot Chilli Peppers Shirt",
-		"available":100,
-		"id":"8"},
-	{
-		"imgName":"Merch\/Beatles Shirt.png",
-		"reserved":0,
-		"price":899,
-		"name":"Beatles Shirt",
-		"available":100,
-		"id":"9"}]}
+{
+  "items": [
+    {
+      "imgName": "Albums/Blink-182 Album.jpg",
+      "reserved": 0,
+      "price": 1299,
+      "name": "Blink-182 Greatest Hits",
+      "available": 87,
+      "id": "1"
+    },
+    {
+      "imgName": "Albums/Let it Be Album.jpg",
+      "reserved": 0,
+      "price": 1499,
+      "name": "Let it Be",
+      "available": 87,
+      "id": "2"
+    },
+    {
+      "imgName": "Albums/Bohemian Rhapsodey Album.jpg",
+      "reserved": 0,
+      "price": 999,
+      "name": "Bohemian Rhapsodey",
+      "available": 87,
+      "id": "3"
+    },
+    {
+      "imgName": "Albums/greenday.jpg",
+      "reserved": 0,
+      "price": 1999,
+      "name": "Greenday",
+      "available": 85,
+      "id": "4"
+    },
+    {
+      "imgName": "Merch/ACDC Shirt.jpg",
+      "reserved": 0,
+      "price": 1999,
+      "name": "ACDC T-Shirt",
+      "available": 86,
+      "id": "5"
+    },
+    {
+      "imgName": "Merch/Linkin Park Shirt.jpg",
+      "reserved": 0,
+      "price": 699,
+      "name": "Linkin Park Shirt",
+      "available": 86,
+      "id": "6"
+    },
+    {
+      "imgName": "Merch/Nirvana Shirt.jpg",
+      "reserved": 0,
+      "price": 799,
+      "name": "Nirvana Shirt",
+      "available": 89,
+      "id": "7"
+    },
+    {
+      "imgName": "Merch/Red Hot Chilli Peppers Shirt.jpg",
+      "reserved": 0,
+      "price": 1299,
+      "name": "Red Hot Chilli Peppers Shirt",
+      "available": 89,
+      "id": "8"
+    },
+    {
+      "imgName": "Merch/Beatles Shirt.png",
+      "reserved": 0,
+      "price": 899,
+      "name": "Beatles Shirt",
+      "available": 89,
+      "id": "9"
+    }
+  ]
+}
