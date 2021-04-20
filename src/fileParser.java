@@ -43,7 +43,7 @@ class fileParser{
         int nextAvailable = -2;
         //Parse the file
         JSONParser jsonParser = new JSONParser();
-        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../config_files/accounts.json"));
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../CS_2365_Project_Java/config_files/accounts.json"));
 
         //Iterating the contents of the array 'items'
         Iterator iterator = jsonArray.iterator();
@@ -64,10 +64,10 @@ class fileParser{
      * @throws ParseException : incorrect JSON object
      */
     public String getNextOrderId() throws IOException, ParseException {
-        String nextAvailable = "";
+        String nextAvailable = "0";
         //Parse the file
         JSONParser jsonParser = new JSONParser();
-        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../config_files/orders.json"));
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../CS_2365_Project_Java/config_files/orders.json"));
 
         //Iterating the contents of the array 'items'
         Iterator iterator = jsonArray.iterator();
@@ -92,7 +92,7 @@ class fileParser{
     public void updateOrderStatus(String orderId, String desiredStatus) throws IOException, ParseException {
         //Parse the file
         JSONParser jsonParser = new JSONParser();
-        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../config_files/orders.json"));
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../CS_2365_Project_Java/config_files/orders.json"));
 
         //Iterating the contents of the array 'items'
         Iterator iterator = jsonArray.iterator();
@@ -105,7 +105,7 @@ class fileParser{
             }
         }
 
-        PrintWriter pw = new PrintWriter("../config_files/orders.json");
+        PrintWriter pw = new PrintWriter("../CS_2365_Project_Java/config_files/orders.json");
         pw.write(jsonArray.toJSONString()
                 .replace("},{", "},\n\n\t\t{")
                 .replace("}]", "\n\t\t}]")
@@ -142,12 +142,12 @@ class fileParser{
      * @throws IOException
      * @throws ParseException
      */
-    public void addNewOrder(String customerId, int orderTotal, String orderStatus, String purchaseAuthorizationNumber, String orderDate, ArrayList<item> items) throws IOException, ParseException {
+    public void addNewOrder(String customerId, int orderTotal, String orderStatus, String purchaseAuthorizationNumber, String orderDate, String shippingMethod, ArrayList<item> items) throws IOException, ParseException {
         String orderId = this.getNextOrderId();
 
         //Parse the file
         JSONParser jsonParser = new JSONParser();
-        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../config_files/orders.json"));
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../CS_2365_Project_Java/config_files/orders.json"));
 
         Map<String, Serializable> m = new LinkedHashMap<String, Serializable>(7);
         m.put("orderId", orderId);
@@ -156,6 +156,7 @@ class fileParser{
         m.put("orderStatus", orderStatus);
         m.put("purchaseAuthorizationNumber", purchaseAuthorizationNumber);
         m.put("orderDate", orderDate);
+        m.put("shippingMethod", shippingMethod);
 
         JSONArray purchased = new JSONArray();
         for(int i = 0; i < items.size(); i++) {
@@ -176,7 +177,7 @@ class fileParser{
 
         jsonArray.add(m);
 
-        PrintWriter pw = new PrintWriter("../config_files/orders.json");
+        PrintWriter pw = new PrintWriter("../CS_2365_Project_Java/config_files/orders.json");
         pw.write(jsonArray.toJSONString()
                 .replace("},{", "},\n\n\t\t{")
                 .replace("}]", "\n\t\t}]")
@@ -186,6 +187,7 @@ class fileParser{
                 .replace("\"orderStatus", "\n\t\t\"orderStatus")
                 .replace("\"purchaseAuthorizationNumber", "\n\t\t\"purchaseAuthorizationNumber")
                 .replace("\"orderDate", "\n\t\t\"orderDate")
+                .replace("\"shippingMethod", "\n\t\t\"shippingMethod")
                 .replace("\"items", "\n\t\t\"items")
                 .replace("\"imgName", "\n\t\t\t\"imgName")
                 .replace("\"price", "\n\t\t\t\"price")
@@ -209,10 +211,10 @@ class fileParser{
      * @throws IOException : incorrect file path
      * @throws ParseException : incorrect json object
      */
-    public void changeItemReservedAmount(String itemName, int quantity) throws IOException, ParseException {
+    public boolean changeItemReservedAmount(String itemName, int quantity, boolean updateFile) throws IOException, ParseException {
         //Parse the file
         JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader("../config_files/items.json"));
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader("../CS_2365_Project_Java/config_files/items.json"));
 
         //Iter through the 'items' attribute
         JSONArray jsonArray = (JSONArray) jsonObject.get("items");
@@ -226,23 +228,30 @@ class fileParser{
             String name = (String) item.get("name");
             int stock = ((Long)item.get("reserved")).intValue();
 
-            if(itemName.equals(name)){
-                item.put("reserved", stock + quantity);
-            }
+            if(itemName.equals(name))
+                if(stock + quantity >= 0)
+                    item.put("reserved", stock + quantity);
+                else
+                    return false;
+
         }
 
-        PrintWriter pw = new PrintWriter("../config_files/items.json");
-        pw.write(jsonObject.toJSONString()
-                .replace("{\"items\":[{", "{\"items\":[{")
-                .replace("\"imgName\"", "\n\t\t\"imgName\"")
-                .replace("\"reserved\"", "\n\t\t\"reserved\"")
-                .replace("\"price\"", "\n\t\t\"price\"")
-                .replace("\"name\"", "\n\t\t\"name\"")
-                .replace("\"available\"", "\n\t\t\"available\"")
-                .replace("\"id\"", "\n\t\t\"id\"")
-                .replace("},{", "},\n\t{")
-        );        pw.flush();
-        pw.close();
+        if(updateFile) {
+            PrintWriter pw = new PrintWriter("../CS_2365_Project_Java/config_files/items.json");
+            pw.write(jsonObject.toJSONString()
+                    .replace("{\"items\":[{", "{\"items\":[{")
+                    .replace("\"imgName\"", "\n\t\t\"imgName\"")
+                    .replace("\"reserved\"", "\n\t\t\"reserved\"")
+                    .replace("\"price\"", "\n\t\t\"price\"")
+                    .replace("\"name\"", "\n\t\t\"name\"")
+                    .replace("\"available\"", "\n\t\t\"available\"")
+                    .replace("\"id\"", "\n\t\t\"id\"")
+                    .replace("},{", "},\n\t{")
+            );
+            pw.flush();
+            pw.close();
+        }
+        return true;
     }
 
     /**
@@ -254,10 +263,10 @@ class fileParser{
      * @throws IOException : incorrect file path
      * @throws ParseException : incorrect json object
      */
-    public void changeItemAvailableAmount(String itemName, int quantity) throws IOException, ParseException {
+    public boolean changeItemAvailableAmount(String itemName, int quantity, boolean updateFile) throws IOException, ParseException {
         //Parse the file
         JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader("../config_files/items.json"));
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader("../CS_2365_Project_Java/config_files/items.json"));
 
         //Iter through the 'items' attribute
         JSONArray jsonArray = (JSONArray) jsonObject.get("items");
@@ -271,44 +280,91 @@ class fileParser{
             String name = (String) item.get("name");
             int stock = ((Long)item.get("available")).intValue();
 
-            if(itemName.equals(name)){
-                item.put("available", stock + quantity);
+            if(itemName.equals(name))
+                if(stock + quantity >= 0)
+                    item.put("available", stock + quantity);
+                else
+                    return false;
+
+        }
+
+        if(updateFile) {
+            PrintWriter pw = new PrintWriter("../CS_2365_Project_Java/config_files/items.json");
+            pw.write(jsonObject.toJSONString()
+                    .replace("{\"items\":[{", "{\"items\":[{")
+                    .replace("\"imgName\"", "\n\t\t\"imgName\"")
+                    .replace("\"reserved\"", "\n\t\t\"reserved\"")
+                    .replace("\"price\"", "\n\t\t\"price\"")
+                    .replace("\"name\"", "\n\t\t\"name\"")
+                    .replace("\"available\"", "\n\t\t\"available\"")
+                    .replace("\"id\"", "\n\t\t\"id\"")
+                    .replace("},{", "},\n\t{")
+            );
+            pw.flush();
+            pw.close();
+        }
+        return true;
+    }
+
+    /**
+     * Given new cardInfo and a customerID, this method will update the card information saved. Used if the Customer's
+     *  card gets declined and a new one is entered, that works.
+     * @param customerID : unique ID to the customer
+     * @param cardNumber : 16 digit card number
+     * @param cardExpiration : MM-YY format date
+     * @param cardCVV : 3 digit security code
+     * @throws IOException : wrong file path
+     * @throws ParseException : wrong json file
+     */
+    public void changeCardInfo(String customerID, String cardNumber, String cardExpiration, String cardCVV) throws IOException, ParseException {
+        JSONParser jsonParser = new JSONParser();
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../CS_2365_Project_Java/config_files/accounts.json"));
+        Iterator iterator = jsonArray.iterator();
+        while(iterator.hasNext()) {
+            //Grab the next object and save appropriate types
+            JSONObject account = (JSONObject) iterator.next();
+
+            if(customerID.equals("" + account.get("id"))){
+                account.put("cardNumber", cardNumber);
+                account.put("cardExpiration", cardExpiration);
+                account.put("cardCVV", cardCVV);
             }
         }
 
-        PrintWriter pw = new PrintWriter("../config_files/items.json");
-        pw.write(jsonObject.toJSONString()
-            .replace("{\"items\":[{", "{\"items\":[{")
-            .replace("\"imgName\"", "\n\t\t\"imgName\"")
-            .replace("\"reserved\"", "\n\t\t\"reserved\"")
-            .replace("\"price\"", "\n\t\t\"price\"")
-            .replace("\"name\"", "\n\t\t\"name\"")
-            .replace("\"available\"", "\n\t\t\"available\"")
-            .replace("\"id\"", "\n\t\t\"id\"")
-            .replace("},{", "},\n\t{")
+        PrintWriter pw = new PrintWriter("../CS_2365_Project_Java/config_files/accounts.json");
+        pw.write(jsonArray.toJSONString()
+                .replace("\"cardCVV", "\n\t\"cardCVV")
+                .replace("\"password", "\n\t\"password")
+                .replace("\"id", "\n\t\"id")
+                .replace("\"cardExpiration", "\n\t\"cardExpiration")
+                .replace("\"type", "\n\t\"type")
+                .replace("\"email", "\n\t\"email")
+                .replace("\"cardNumber", "\n\t\"cardNumber")
+                .replace("},{", "},\n\n\t{")
         );
+
         pw.flush();
         pw.close();
     }
 
-    /**
-     * Given the params passed, adds an account to the accounts.json file. Please note that error checking is not done
-     *  in this method. All params must be passed in correctly
-     * @param email : email of the customer
-     * @param password : password of the customer
-     * @param cardNumber : 16 digit card number of the customer
-     * @param cardExpiration : MM/YY format of the card expiration date
-     * @param cardCVV : three digit card CVV code
-     * @param type : type of the account... customer or supplier
-     * @throws IOException : incorrect file path
-     * @throws ParseException : incorrect JSON object
-     */
-    public void createAccount(String email, String password, String cardNumber, String cardExpiration, String cardCVV, String type) throws IOException, ParseException {
+        /**
+         * Given the params passed, adds an account to the accounts.json file. Please note that error checking is not done
+         *  in this method. All params must be passed in correctly
+         * @param email : email of the customer
+         * @param password : password of the customer
+         * @param cardNumber : 16 digit card number of the customer
+         * @param cardExpiration : MM/YY format of the card expiration date
+         * @param cardCVV : three digit card CVV code
+         * @param type : type of the account... customer or supplier
+         * @throws IOException : incorrect file path
+         * @throws ParseException : incorrect JSON object
+         */
+    public int createAccount(String email, String password, String cardNumber, String cardExpiration, String cardCVV, String type) throws IOException, ParseException {
         int id = this.getNextCustomerId();
 
         //Parse the file
         JSONParser jsonParser = new JSONParser();
-        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../config_files/accounts.json"));
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../CS_2365_Project_Java/config_files/accounts.json"));
 
         Map<String, Serializable> m = new LinkedHashMap<String, Serializable>(7);
         m.put("cardCVV",cardCVV);
@@ -321,7 +377,7 @@ class fileParser{
 
         jsonArray.add(m);
 
-        PrintWriter pw = new PrintWriter("../config_files/accounts.json");
+        PrintWriter pw = new PrintWriter("../CS_2365_Project_Java/config_files/accounts.json");
         pw.write(jsonArray.toJSONString()
             .replace("\"cardCVV", "\n\t\"cardCVV")
             .replace("\"password", "\n\t\"password")
@@ -335,6 +391,8 @@ class fileParser{
 
         pw.flush();
         pw.close();
+
+        return id;
     }
 
     /**
@@ -344,9 +402,11 @@ class fileParser{
      * @throws ParseException : incorrect accounts.json file
      */
     public ArrayList<account> getAccounts() throws IOException, ParseException {
+        accounts = new ArrayList<>();
+
         //Parse the file
         JSONParser jsonParser = new JSONParser();
-        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../config_files/accounts.json"));
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../CS_2365_Project_Java/config_files/accounts.json"));
 
         //Iterating the contents of the array 'items'
         Iterator iterator = jsonArray.iterator();
@@ -375,9 +435,10 @@ class fileParser{
      * @throws ParseException : incorrect orders.json file
      */
     public ArrayList<order> getOrders() throws IOException, ParseException {
+        order_history = new ArrayList<>();
         //Parse the file
         JSONParser jsonParser = new JSONParser();
-        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../config_files/orders.json"));
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("../CS_2365_Project_Java/config_files/orders.json"));
 
         //Iterating the contents of the array 'items'
         Iterator iterator = jsonArray.iterator();
@@ -390,6 +451,7 @@ class fileParser{
             int orderTotal = ((Long)order.get("orderTotal")).intValue();
             String orderStatus = (String) order.get("orderStatus");
             String purchaseAuthorizationNumber = (String) order.get("purchaseAuthorizationNumber");
+            String shippingMethod = (String) order.get("shippingMethod");
             String orderDate = (String) order.get("orderDate");
             ArrayList<item> items = new ArrayList<item>();
 
@@ -413,7 +475,7 @@ class fileParser{
 
             }
 
-            order_history.add(new order(orderId, customerId, orderTotal, orderStatus, purchaseAuthorizationNumber, orderDate, items));
+            order_history.add(new order(orderId, customerId, orderTotal, orderStatus, purchaseAuthorizationNumber, orderDate, shippingMethod, items));
         }
 
         return order_history;
@@ -426,9 +488,11 @@ class fileParser{
      * @throws ParseException : incorrect items.json file
      */
     public ArrayList<item> getItems() throws IOException, ParseException {
+        catalog = new ArrayList<>();
+
         //Parse the file
         JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader("../config_files/items.json"));
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader("../CS_2365_Project_Java/config_files/items.json"));
 
         //Iter through the 'items' attribute
         JSONArray jsonArray = (JSONArray) jsonObject.get("items");

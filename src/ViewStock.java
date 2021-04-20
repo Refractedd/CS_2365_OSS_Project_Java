@@ -10,28 +10,31 @@ import org.json.simple.parser.ParseException;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.stage.Stage;
-import javafx.application.Application;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Font;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class ViewStock extends Application {
+public class ViewStock {
 	
-	private static final String STOCK_FILE_PATH = "/Users/brandonmaciel/Documents/School/Semesters/Spring 2021 TTU/Object-Oriented Programming (CS 2365-001)/Project/OnlineShoppingSystem/items.json";
+	private static final String STOCK_FILE_PATH = "../CS_2365_Project_Java/config_files/items.json";
+	@SuppressWarnings("rawtypes")
 	private TableView table = new TableView();
  	private final ObservableList<Item> data = FXCollections.observableArrayList();
 
- 	@Override
-	public void start(Stage stage) throws FileNotFoundException, IOException, ParseException {
+	@SuppressWarnings("unchecked")
+	public void GUI(Stage stage) throws FileNotFoundException, IOException, ParseException {
 		
 		/* create JSONParser object and parses ORDER_FILE_PATH */
 		JSONParser parser = new JSONParser();
@@ -40,35 +43,12 @@ public class ViewStock extends Application {
 		JSONObject itemsObj = (JSONObject) obj;
 		JSONArray items = (JSONArray) itemsObj.get("items");
 		
-		table.setEditable(true);
-		
-		TableColumn columnName = new TableColumn("Item Name");
-		columnName.setMinWidth(200);
-		columnName.setCellValueFactory(
-                new PropertyValueFactory<Item, String>("name"));
- 
-        TableColumn columnReserved = new TableColumn("Reserved");
-        columnReserved.setMinWidth(100);
-        columnReserved.setCellValueFactory(
-                new PropertyValueFactory<Item, Integer>("reserved"));
- 
-        TableColumn columnPrice = new TableColumn("Price");
-        columnPrice.setMinWidth(100);
-        columnPrice.setCellValueFactory(
-                new PropertyValueFactory<Item, Double>("price"));
-        
-        TableColumn columnStock = new TableColumn("In Stock");
-        columnStock.setMinWidth(100);
-        columnStock.setCellValueFactory(
-        		new PropertyValueFactory<Item, Integer>("available"));
-        
-        TableColumn columnID = new TableColumn("ID");
-        columnID.setMinWidth(100);
-        columnID.setCellValueFactory(
-        		new PropertyValueFactory<Item, String>("ID"));
-
-        
-        table.getColumns().addAll(columnName, columnReserved, columnPrice, columnStock, columnID);
+		table.setEditable(true);        
+        table.getColumns().addAll(	newTableColumn("Item Name", 200, "name"), 
+					        		newTableColumn("Reserved", 100, "reserved"), 
+					        		newTableColumn("Price", 100, "price"), 
+					        		newTableColumn("In Stock", 100, "available"), 
+					        		newTableColumn("ID", 100, "ID"));
         
         /* for each order in orders */
 		for(Object order: items) {
@@ -77,21 +57,23 @@ public class ViewStock extends Application {
 			/* add orderID to linkedList */
 			data.add(new Item((String) 		orderObj.get("name"),
 							(int) (long)	orderObj.get("reserved"),
-							(Double) 		orderObj.get("price"),
+							(int) (long)	orderObj.get("price"),
 							(String) 		orderObj.get("id"),
 							(int) (long)	orderObj.get("available")));
 		}
 		
 		table.setItems(data);
 		
-		
+		Button backButton = new Button("Back");
+		backButton.setOnAction(new backButtonHandler());
+		backButton.setMinWidth(100);
 		
 		final VBox vbox = new VBox();
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 0, 0, 10));
         final Label title = new Label("Stock View");
 		title.setFont(new Font("Arial", 20));
-        vbox.getChildren().addAll(title, table);
+        vbox.getChildren().addAll(title, backButton, table);
 		
 		Scene scene = new Scene(new Group());
         ((Group) scene.getRoot()).getChildren().addAll(vbox);
@@ -109,10 +91,10 @@ public class ViewStock extends Application {
         private final SimpleIntegerProperty available;
         private final SimpleStringProperty ID;
         
-        private Item(String name, int reserved, double price, String ID, int available) {
+        private Item(String name, int reserved, int price, String ID, int available) {
             this.name = new SimpleStringProperty(name);
             this.reserved = new SimpleIntegerProperty(reserved);
-            this.price = new SimpleDoubleProperty(price);
+            this.price = new SimpleDoubleProperty(price/100.00);
             this.ID = new SimpleStringProperty(ID);
             this.available = new SimpleIntegerProperty(available);
         }
@@ -152,4 +134,25 @@ public class ViewStock extends Application {
         	ID.set(string);
         }
  	}
+ 	
+ 	/* creates new table column */
+	 private TableColumn<Item, String> newTableColumn(String columnTitle, int columnWidth, String classVar) {
+		 
+		 /* Creates column */
+		 TableColumn<Item, String> newColumn = new TableColumn<Item, String>(columnTitle);
+		 newColumn.setMinWidth(columnWidth);
+		 
+		 /* sets value to cell from object Order using attribute classVar */
+		 newColumn.setCellValueFactory(new PropertyValueFactory<Item, String>(classVar));
+		 
+		 return newColumn;
+	 }
+ 	
+	 class backButtonHandler implements EventHandler<ActionEvent> {
+		 
+		 @Override
+		 public void handle(ActionEvent event) {
+			 SupplierView.supplierGUI.supplierView(SupplierView.primaryStage);
+		 }
+	 }
 }

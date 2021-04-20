@@ -5,7 +5,7 @@ class item{
     int reserved; //units reserved
     int available; //units available
     String imgName; //file path of the img (id applicable)
-    int quantityPurchased; //holds the number of items purchased for order history
+    int quantityPurchased = 0; //holds the number of items purchased for order history
 
     //constructors
     item(){

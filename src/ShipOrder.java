@@ -17,7 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import javafx.application.Application;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -36,20 +35,22 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 
-public class ShipOrder extends Application {
+public class ShipOrder {
 	
-	private static final String ORDER_FILE_PATH = "/Users/brandonmaciel/Documents/School/Semesters/Spring 2021 TTU/Object-Oriented Programming (CS 2365-001)/Project/OnlineShoppingSystem/orders.json";
-	private static final String STOCK_FILE_PATH = "/Users/brandonmaciel/Documents/School/Semesters/Spring 2021 TTU/Object-Oriented Programming (CS 2365-001)/Project/OnlineShoppingSystem/items.json"; 	
+	private static final String ORDER_FILE_PATH = "../CS_2365_Project_Java/config_files/orders.json";
+	private static final String STOCK_FILE_PATH = "../CS_2365_Project_Java/config_files/items.json";
+	@SuppressWarnings("rawtypes")
 	private TableView table = new TableView();
  	private final ObservableList<Order> data = FXCollections.observableArrayList();
  	JSONArray orders;
  	JSONObject orderObj;
 		
 	// display orders GUI
-	@Override
-    public void start(Stage stage) throws FileNotFoundException, IOException, ParseException {
+    @SuppressWarnings("unchecked")
+	public void GUI(Stage stage) throws FileNotFoundException, IOException, ParseException {
 		
 		/* create JSONParser object and parses ORDER_FILE_PATH */
 		JSONParser parser = new JSONParser();
@@ -58,35 +59,13 @@ public class ShipOrder extends Application {
 		/* get JSON array of orders from Object obj */
 		orders = (JSONArray) obj;
 		
-		table.setEditable(true);
-		
-		TableColumn status = new TableColumn("Status");
-		status.setMinWidth(100);
-		status.setCellValueFactory(
-                new PropertyValueFactory<Order, String>("status"));
- 
-        TableColumn ID = new TableColumn("Order ID");
-        ID.setMinWidth(100);
-        ID.setCellValueFactory(
-                new PropertyValueFactory<Order, String>("ID"));
- 
-        TableColumn custID = new TableColumn("Customer ID");
-        custID.setMinWidth(200);
-        custID.setCellValueFactory(
-                new PropertyValueFactory<Order, String>("customerID"));
+		table.setEditable(true);        
+        table.getColumns().addAll(	newTableColumn("Status", 100, "status"), 
+					        		newTableColumn("Order ID", 100, "ID"), 
+					        		newTableColumn("Customer ID", 200, "customerID"), 
+					        		newTableColumn("Total", 100, "total"),
+					        		newTableColumn("Date of Purchase", 100, "date"));
         
-        TableColumn total = new TableColumn("Total");
-        total.setMinWidth(100);
-        total.setCellValueFactory(
-        		new PropertyValueFactory<Order, Double>("total"));
-        
-        TableColumn date = new TableColumn("Date of purchase");
-        date.setMinWidth(100);
-        date.setCellValueFactory(
-        		new PropertyValueFactory<Order, String>("date"));
-
-        
-        table.getColumns().addAll(status, ID, custID, total, date);
         processOrderButton(stage);
 		
 		/* for each order in orders */
@@ -100,7 +79,7 @@ public class ShipOrder extends Application {
 				data.add(new Order((String) orderObj.get("orderStatus"),
 						(String) orderObj.get("orderId"),
 						(String) orderObj.get("customerId"),
-						(Double) orderObj.get("orderTotal"),
+						(int) (long) orderObj.get("orderTotal"),
 						(String) orderObj.get("orderDate"),
 						(JSONArray) orderObj.get("items")));
 			}
@@ -110,12 +89,16 @@ public class ShipOrder extends Application {
 		table.setItems(data);
 		table.setMinWidth(706);
 		
+		Button backButton = new Button("Back");
+		backButton.setOnAction(new backButtonHandler());
+		backButton.setMinWidth(100);
+		
 		final VBox vbox = new VBox();
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 0, 0, 10));
         final Label title = new Label("Ship Orders");
 		title.setFont(new Font("Arial", 20));
-        vbox.getChildren().addAll(title, table);
+        vbox.getChildren().addAll(title, backButton, table);
         
         
         Scene scene = new Scene(new Group());
@@ -136,11 +119,11 @@ public class ShipOrder extends Application {
         private final SimpleStringProperty date;
         private final JSONArray items;
         
-        private Order(String status, String ID, String customerID, double total, String date, JSONArray items) {
+        private Order(String status, String ID, String customerID, int total, String date, JSONArray items) {
             this.status = new SimpleStringProperty(status);
             this.ID = new SimpleStringProperty(ID);
             this.customerID = new SimpleStringProperty(customerID);
-            this.total = new SimpleDoubleProperty(total);
+            this.total = new SimpleDoubleProperty(total/100.00);
             this.date = new SimpleStringProperty(date);
             this.items = items;
         }
@@ -186,9 +169,23 @@ public class ShipOrder extends Application {
         
         
     }
+	
+	 /* creates new table column */
+	 private TableColumn<Order, String> newTableColumn(String columnTitle, int columnWidth, String classVar) {
+		 
+		 /* Creates column */
+		 TableColumn<Order, String> newColumn = new TableColumn<Order, String>(columnTitle);
+		 newColumn.setMinWidth(columnWidth);
+		 
+		 /* sets value to cell from object Order using attribute classVar */
+		 newColumn.setCellValueFactory(new PropertyValueFactory<Order, String>(classVar));
+		 
+		 return newColumn;
+	 }
 
 	/* process order button */
-	 private void processOrderButton(Stage mainStage) {
+	 @SuppressWarnings({ "unchecked", "rawtypes" })
+	private void processOrderButton(Stage mainStage) {
 	        TableColumn<Order, Void> colBtn = new TableColumn("Process Orders");
 
 	        Callback<TableColumn<Order, Void>, TableCell<Order, Void>> cellFactory = new Callback<TableColumn<Order, Void>, TableCell<Order, Void>>() {
@@ -357,5 +354,11 @@ public class ShipOrder extends Application {
 
 	    }
 
-
+	 class backButtonHandler implements EventHandler<ActionEvent> {
+		 
+		 @Override
+		 public void handle(ActionEvent event) {
+			 SupplierView.supplierGUI.supplierView(SupplierView.primaryStage);
+		 }
+	 }
 }
